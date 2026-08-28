@@ -1,0 +1,15 @@
+version: 1.0.{build}
+image: Visual Studio 2022
+
+environment:
+  APPVEYOR_RDP_PASSWORD: CynetAdmin@2026!
+
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+build_script:
+  - ps: Write-Host "🚀 CYNET Windows Cloud RDP Server is Live!"
+  - ps: Start-Sleep -Seconds 3600
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
